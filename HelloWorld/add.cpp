@@ -1,14 +1,19 @@
 #include <iostream>
 #include <thread>
+#include <mutex>
 
 using namespace std;
 
 int sum;
+mutex myl;
 
 void worker()
 {
-	for(auto i = 0; i < 50000000; ++i) 
-		sum = sum + 2;
+	for (auto i = 0; i < 25000000; ++i) {
+		myl.lock();
+		sum += 2;
+		myl.unlock();
+	}
 }
 
 int main()
