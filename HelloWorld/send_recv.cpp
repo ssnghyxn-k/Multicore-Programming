@@ -8,8 +8,10 @@ std::mutex sr_lock;		// send-receive lock
 
 void recv()
 {
-	while (false == g_ready);	// VS가 이 부분을 컴파일 할때 그냥 넘겨버림
+	long long count = 0;
+	while (false == g_ready) count++;
 	std::cout << "Data = " << g_data << std::endl;
+	std::cout << "Loop Count = " << count << std::endl;
 }
 
 void send()
