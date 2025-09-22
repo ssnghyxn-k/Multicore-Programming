@@ -30,5 +30,8 @@
     <ClCompile Include="send_recv.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="peterson.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
