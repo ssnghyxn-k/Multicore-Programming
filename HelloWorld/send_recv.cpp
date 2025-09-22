@@ -8,21 +8,14 @@ std::mutex sr_lock;		// send-receive lock
 
 void recv()
 {
-	sr_lock.lock();
-	while (false == g_ready) {
-		sr_lock.unlock();
-		sr_lock.lock();
-	}
+	while (false == g_ready);	// VS가 이 부분을 컴파일 할때 그냥 넘겨버림
 	std::cout << "Data = " << g_data << std::endl;
-	sr_lock.unlock();
 }
 
 void send()
 {
-	sr_lock.lock();
 	std::cin >> g_data;
 	g_ready = true;
-	sr_lock.unlock();
 }
 
 int main()
