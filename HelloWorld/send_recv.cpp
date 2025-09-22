@@ -2,21 +2,21 @@
 #include <thread>
 #include <mutex>
 
-int g_data = 0;
-bool g_ready = false;
+volatile int g_data = 0;
+volatile bool g_ready = false;
 std::mutex sr_lock;		// send-receive lock
 
 void recv()
 {
-	long long count = 0;
-	while (false == g_ready) count++;
+	while (false == g_ready);
 	std::cout << "Data = " << g_data << std::endl;
-	std::cout << "Loop Count = " << count << std::endl;
 }
 
 void send()
 {
-	std::cin >> g_data;
+	int temp = 0;
+	std::cin >> temp;
+	g_data = temp;
 	g_ready = true;
 }
 
