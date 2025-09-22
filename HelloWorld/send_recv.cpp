@@ -9,7 +9,10 @@ std::mutex sr_lock;		// send-receive lock
 void recv()
 {
 	sr_lock.lock();
-	while (false == g_ready);
+	while (false == g_ready) {
+		sr_lock.unlock();
+		sr_lock.lock();
+	}
 	std::cout << "Data = " << g_data << std::endl;
 	sr_lock.unlock();
 }
